@@ -12,11 +12,14 @@
   "dependencies": {
     "@drip/drip-design": "^4.18.21",
     "@drip/voice-feedback-entrance": "^0.1.6",
-    "@mktfe/demo-lib": "0.0.2",
-    "@mktfe/demo-ui": "0.0.10",
+    "@mktfe/date-demo": "0.0.1",
+    "@mktfe/demo-lib": "0.0.5",
+    "@mktfe/demo-ui": "0.0.11",
     "antd": "^4.24.15",
+    "lodash": "^4.17.21",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.22.2"
   },
   "devDependencies": {
     "@types/react": "^18.0.37",
