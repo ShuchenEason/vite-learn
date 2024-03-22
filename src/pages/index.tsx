@@ -15,13 +15,7 @@ import {
     UserOutlined,
     SearchOutlined
 } from '@ant-design/icons'
-import 'antd/dist/antd.css'
-import VoiceFeedbackEntrance from '@drip/voice-feedback-entrance'
-import { Button } from '@drip/drip-design'
-import '@drip/drip-design/dist/drip-design.css'
-import DemoUI from '@mktfe/demo-ui'
-import demoLib from '@mktfe/demo-lib'
-import dateDemo from '@mktfe/date-demo'
+import { Link } from 'react-router-dom'
 
 const { Header, Content, Sider } = Layout
 const { Search } = Input
@@ -42,9 +36,6 @@ const data = [
 const App = () => {
     useEffect(() => {
         console.log('useEffect')
-        console.log('useEffect', DemoUI)
-        demoLib()
-        dateDemo()
     }, [])
     return (
         <Layout>
@@ -92,9 +83,20 @@ const App = () => {
                         defaultOpenKeys={['sub1']}
                         style={{ height: '100%', borderRight: 0 }}
                     >
-                        <Menu.Item key="1">菜单项1</Menu.Item>
-                        <Menu.Item key="2">菜单项2</Menu.Item>
-                        <Menu.Item key="3">菜单项3</Menu.Item>
+                        <Menu.Item
+                            key="1"
+                            onClick={() => {
+                                console.log('click')
+                            }}
+                        >
+                            <Link to="/chat">Go to Chat</Link>
+                        </Menu.Item>
+                        <Menu.Item key="2">
+                            <Link to="/pdf">Go to PDF</Link>
+                        </Menu.Item>
+                        <Menu.Item key="3">
+                            <Link to="/react-pdf">Go to React-PDF</Link>
+                        </Menu.Item>
                         <Menu.Item key="4">菜单项4</Menu.Item>
                         {/* ... other menu items */}
                     </Menu>
@@ -145,17 +147,6 @@ const App = () => {
                             )}
                         />
                     </Content>
-                    <VoiceFeedbackEntrance />
-                    <div>
-                        <Button>123</Button>
-                        <DemoUI
-                            type="primary"
-                            // style={{ height: '30px' }}
-                            label="demo ui"
-                        >
-                            123
-                        </DemoUI>
-                    </div>
                 </Layout>
             </Layout>
         </Layout>
