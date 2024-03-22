@@ -2,7 +2,7 @@ import { useCallback, useState } from 'react'
 import { pdfjs, Document, Page } from 'react-pdf'
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css'
 import 'react-pdf/dist/esm/Page/TextLayer.css'
-import './react-pdf.less'
+import './page-pdf.less'
 
 import { Input, Spin, Tooltip } from 'antd'
 import {
@@ -99,6 +99,11 @@ export default function Sample() {
                     <LeftOutlined onClick={lastPage} />
                 </Tooltip>
                 <Input
+                    style={{
+                        display: 'inline-block',
+                        width: '50px',
+                        textAlign: 'center'
+                    }}
                     value={pageNumberFocus ? pageNumberInput : pageNumber}
                     onFocus={onPageNumberFocus}
                     onBlur={onPageNumberBlur}

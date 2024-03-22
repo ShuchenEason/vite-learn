@@ -1,97 +1,96 @@
-import { useCallback, useState } from 'react'
-import { useResizeObserver } from '@wojtekmaj/react-hooks'
-import { pdfjs, Document, Page } from 'react-pdf'
-import 'react-pdf/dist/esm/Page/AnnotationLayer.css'
-import 'react-pdf/dist/esm/Page/TextLayer.css'
-import './pdf.less'
+import React from 'react'
+import { Layout, Menu, Breadcrumb, Typography } from 'antd'
+import { Link } from 'react-router-dom'
+import EgPdf from './eg-pdf'
+import PagePdf from './page-pdf'
+const { Sider, Content } = Layout
+const { Text } = Typography
 
-import { Pagination } from 'antd'
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`
-
-const options = {
-    cMapUrl: '/cmaps/',
-    standardFontDataUrl: '/standard_fonts/'
+interface MenuItem {
+    key: string
+    title: string
+    content: string // 文案内容
+    fileUrl?: string // 文件地址
 }
 
-const resizeObserverOptions = {}
-
-const maxWidth = 800
-
-type PDFFile = string | File | null
-
-export default function Sample() {
-    const [file, setFile] = useState<PDFFile>(
-        'https://brand-refactor-material.s3.cn-north-1.jdcloud-oss.com/material/material_65fd312ee4b08d1543480398.pdf'
-    )
-    const [numPages, setNumPages] = useState<number>()
-    const [pageNumber, setPageNumber] = useState<number>(1)
-    const [containerRef, setContainerRef] = useState<HTMLElement | null>(null)
-    const [containerWidth, setContainerWidth] = useState<number>()
-
-    const onResize = useCallback<ResizeObserverCallback>((entries) => {
-        const [entry] = entries
-
-        if (entry) {
-            setContainerWidth(entry.contentRect.width)
-        }
-    }, [])
-
-    useResizeObserver(containerRef, resizeObserverOptions, onResize)
-
-    function onFileChange(event: React.ChangeEvent<HTMLInputElement>): void {
-        const { files } = event.target
-
-        if (files && files[0]) {
-            setFile(files[0] || null)
-        }
+const menuItems: MenuItem[] = [
+    { key: '1', title: '目录一', content: '这是目录一的内容' },
+    {
+        key: '2',
+        title: '目录二',
+        content: '这是目录二的内容',
+        fileUrl:
+            'https://brand-refactor-material.s3.cn-north-1.jdcloud-oss.com/material/material_65fd312ee4b08d1543480398.pdf'
     }
-    function onDocumentLoadSuccess({ numPages }: { numPages: number }): void {
-        setNumPages(numPages)
+    // 更多目录项...
+]
+
+function SidebarAndContent() {
+    const [selectedKey, setSelectedKey] = React.useState(menuItems[0].key)
+
+    const onMenuClick = (e: any) => {
+        setSelectedKey(e.key)
     }
 
     return (
-        <div className="Example">
-            <header>
-                <h1>react-pdf sample page</h1>
-            </header>
-            <div className="Example__container">
-                <div className="Example__container__load">
-                    <label htmlFor="file">Load from file:</label>
-                    <input onChange={onFileChange} type="file" />
-                </div>
-                <div
-                    className="Example__container__document"
-                    ref={setContainerRef}
+        <Layout>
+            <Sider width={200}>
+                <Menu
+                    selectedKeys={[selectedKey]}
+                    mode="inline"
+                    onClick={onMenuClick}
                 >
-                    <Document
-                        file={file}
-                        onLoadSuccess={onDocumentLoadSuccess}
-                        options={options}
+                    {menuItems.map((item) => (
+                        <Menu.Item key={item.key}>
+                            <Link to={`#${item.key}`}>{item.title}</Link>
+                        </Menu.Item>
+                    ))}
+                </Menu>
+            </Sider>
+            <Layout>
+                <Breadcrumb style={{ margin: '16px 0' }}>
+                    {/* 根据选中的菜单项生成面包屑导航 */}
+                    <Breadcrumb.Item>
+                        {
+                            menuItems.find((item) => item.key === selectedKey)
+                                ?.title
+                        }
+                    </Breadcrumb.Item>
+                </Breadcrumb>
+                <Content
+                    style={{
+                        padding: '24px',
+                        background: '#fff',
+                        minHeight: 280
+                    }}
+                >
+                    <Text>
+                        {
+                            menuItems.find((item) => item.key === selectedKey)
+                                ?.content
+                        }
+                    </Text>
+                    <div
+                        style={{
+                            marginTop: 16,
+                            padding: '0 20px',
+                            height: '800px',
+                            // width: '800px',
+                            overflow: 'scroll'
+                        }}
                     >
-                        {Array.from(new Array(numPages), (el, index) => (
-                            <Page
-                                key={`page_${index + 1}`}
-                                pageNumber={index + 1}
-                                width={
-                                    containerWidth
-                                        ? Math.min(containerWidth, maxWidth)
-                                        : maxWidth
-                                }
-                            />
-                        ))}
-                        <Page pageNumber={pageNumber} />
-                    </Document>
-                </div>
-                <Pagination
-                    style={{ marginTop: 20 }}
-                    total={numPages}
-                    showTotal={(total) => `共 ${total} 页`}
-                    current={pageNumber}
-                    pageSize={1}
-                    size="small"
-                    onChange={(page) => setPageNumber(page)}
-                />
-            </div>
-        </div>
+                        <EgPdf
+                            file={
+                                menuItems.find(
+                                    (item) => item.key === selectedKey
+                                )?.fileUrl
+                            }
+                        />
+                    </div>
+                </Content>
+            </Layout>
+        </Layout>
     )
 }
+
+export default SidebarAndContent
