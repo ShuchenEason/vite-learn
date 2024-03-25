@@ -95,7 +95,7 @@ const App = () => {
                             <Link to="/pdf">Go to PDF</Link>
                         </Menu.Item>
                         <Menu.Item key="3">
-                            <Link to="/react-pdf">Go to React-PDF</Link>
+                            <Link to="/">Go to nothing</Link>
                         </Menu.Item>
                         <Menu.Item key="4">菜单项4</Menu.Item>
                         {/* ... other menu items */}
