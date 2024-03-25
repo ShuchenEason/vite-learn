@@ -210,3 +210,7 @@ cutom.css
 .jp-ToolbarButtonComponent[data-command="jupyter-notebook:open-lab"] {
 display: none !important;
 }
+
+# 宝塔部署 Jupyter
+
+https://blog.csdn.net/weixin_49689323/article/details/124918564
