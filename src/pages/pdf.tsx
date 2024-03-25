@@ -23,7 +23,7 @@ const menuItems: MenuItem[] = [
         fileUrl:
             'https://brand-refactor-material.s3.cn-north-1.jdcloud-oss.com/material/material_65fd312ee4b08d1543480398.pdf',
         jupyterUrl:
-            'http://127.0.0.1:8889/notebooks/Desktop/sentiment_analysis.ipynb'
+            'http://127.0.0.1:8888/notebooks/sentiment_analysis.ipynb'
     }
     // 更多目录项...
 ]

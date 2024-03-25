@@ -199,6 +199,14 @@ pip install --upgrade ipywidgets
 pip install --upgrade notebook
 ```
 
-# jupyternote配置
+# jupyternote 配置
 
 https://discourse.jupyter.org/t/while-showing-notebook-inside-my-website-iframe-it-shows-couldnt-authenticate-websocket-connection-and-codes-are-not-executed/24611
+
+# 隐藏跳转 JupyterLab
+
+cutom.css
+
+.jp-ToolbarButtonComponent[data-command="jupyter-notebook:open-lab"] {
+display: none !important;
+}
