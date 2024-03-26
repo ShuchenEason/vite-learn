@@ -1,3 +1,13 @@
+notebook 7 版本以上的更新
+
+notebook => server
+
+https://stackoverflow.com/questions/67797152/what-is-the-difference-between-jupyter-notebook-and-jupyter-server
+
+https://jupyter-notebook.readthedocs.io/en/stable/configuring/config_overview.html
+
+https://jupyter-server.readthedocs.io/en/stable/operators/public-server.html
+
 # jupyterlite 部署
 
 ## 说明文档
