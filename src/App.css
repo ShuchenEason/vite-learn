@@ -1,0 +1,11 @@
+/* index.css 或者在 App.tsx 中创建<style>标签 */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.layout {
+  min-height: 100%;
+}
